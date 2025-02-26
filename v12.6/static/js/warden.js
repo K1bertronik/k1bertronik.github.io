@@ -140,7 +140,7 @@ function PowerfulLunge(physicalDamage){
 
         var damage;
         if (targets > 1) {
-            damage = (baseDamage * (1 + (increasePerTargetPercentages[level] / 100) * targets)) / targets;
+            damage = (baseDamage * (increasePerTargetPercentages[level] / 100) * targets) / targets;
         } else {
             damage = baseDamage;
         }
