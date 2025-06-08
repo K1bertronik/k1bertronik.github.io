@@ -17,8 +17,8 @@ document.getElementById('calcForm').addEventListener('submit', function (event) 
     var repellentStrikeDamage = calculateDamage(RepellentStrike(physicalDamage, health)[0], 'physical');
     var repellentStrikeHeal = calculateHeal(RepellentStrike(physicalDamage, health)[1]);
     var sacredShield = SacredShield(health);
-    var paladinsPrayerDamage = calculateDamage(PaladinsPrayer(magicalDamage), 'magical');
-    var paladinsPrayerCritDamage = calculateDamage(PaladinsPrayerCrit(magicalDamage), 'magical');
+    var paladinsPrayerDamage = calculateDamage(PaladinsPrayer(physicalDamage, magicalDamage), 'magical');
+    var paladinsPrayerCritDamage = calculateDamage(PaladinsPrayerCrit(physicalDamage, magicalDamage), 'magical');
     var everburningCandleHeal = calculateHeal(EverburningCandle());
     var faithReckoningDamage = calculateDamage(FaithReckoning(magicalDamage), 'magical', true);
     var intercessionHeal = calculateHeal(Intercession(magicalDamage));
