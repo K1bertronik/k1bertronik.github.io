@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <title>Warspear Skills Calculator</title>
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar navbar-expand-md navbar-light bg-light">
+            <button id="toggle-theme-button" style="padding: 0; border: none; background: none; margin-right: 5px;">
+                <img src="/static/images/theme.png" alt="Change theme" style="margin: 0">
+            </button>
+            <a class="navbar-brand" href="/index.html">
+                Warspear Skills Calculator
+            </a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about.html">About</a>
+                    </li>
+                </ul>
+            </div>
+            <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </nav>
+
+        <div class="container">
+            <form id="calcForm">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h2>Your stats</h2>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <img src="/static/images/icons/95.webp" class="img-fluid" alt="icon">
+                                <input type="number" class="form-control" id="physdmg" step="any">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <img src="/static/images/icons/897.webp" class="img-fluid" alt="icon">
+                                <input type="number" class="form-control" id="magicdmg" step="any">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <img src="/static/images/icons/556.webp" class="img-fluid" alt="icon">
+                                <input type="number" class="form-control" id="penetration" step="any">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <img src="/static/images/icons/3574.webp" class="img-fluid" alt="icon">
+                                <input type="number" class="form-control" id="ferocity" step="any">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <img src="/static/images/icons/89.webp" class="img-fluid" alt="icon">
+                                <input type="number" class="form-control" id="health" step="any">
+                            </div>
+                        </div>
+                        <div class="form-group d-flex align-items-center">
+                            <img src="/static/images/icons/4064.webp" alt="Castle attack">
+                            <select id="castleDmg" class="form-select">
+                                <option value="0">0%</option>
+                                <option value="5">5%</option>
+                                <option value="7.5">7.5%</option>
+                                <option value="10">10%</option>
+                                <option value="12.5">12.5%</option>
+                                <option value="15">15%</option>
+                            </select>
+                            <img src="/static/images/icons/4392.webp" alt="Exclusive Attack" style="margin-left: 8px;">
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="exclusiveAttackBonus">
+                                <label class="custom-control-label" for="exclusiveAttackBonus">10%</label>
+                            </div>
+                        </div>
+                        <div class="form-group d-flex align-items-center">
+                            <img src="/static/images/icons/4396.webp" alt="United Attack">
+                            <select id="unitedAttackBonus" class="form-select">
+                                <option value="0">0%</option>
+                                <option value="6">6%</option>
+                                <option value="8">8%</option>
+                                <option value="10">10%</option>
+                                <option value="12">12%</option>
+                            </select>
+                            <img src="/static/images/icons/3702.webp" alt="12% relic" style="margin-left: 8px;">
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="relicBonus">
+                                <label class="custom-control-label" for="relicBonus">12%</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <img src="/static/images/icons/4063.webp" alt="Castle heal">
+                            <select id="castleHeal" class="form-select">
+                                <option value="0">0%</option>
+                                <option value="10">10%</option>
+                                <option value="15">15%</option>
+                                <option value="20">20%</option>
+                                <option value="25">25%</option>
+                                <option value="30">30%</option>
+                            </select>
+                            <img src="/static/images/icons/4151.webp" alt="Healing potion">
+                            <select id="healPot" class="form-select">
+                                <option value="0">0%</option>
+                                <option value="30">30%</option>
+                                <option value="60">60%</option>
+                            </select>
+                        </div>
+                        <h2>Your talents</h2>
+                        <div class="form-group">
+                            <img src="/static/images/icons/5924.webp" alt="Bestial rage">
+                            <select id="pveBonusI" class="form-select">
+                                <option value="0">0%</option>
+                                <option value="1">1%</option>
+                                <option value="2">2%</option>
+                                <option value="3">3%</option>
+                            </select>
+
+                            <img src="/static/images/icons/6989.webp" alt="Predatory delirium">
+                            <select id="pveBonusII" class="form-select">
+                                <option value="0">0%</option>
+                                <option value="1">1%</option>
+                                <option value="1.5">1.5%</option>
+                                <option value="2">2%</option>
+                            </select>
+                        </div>
+                        <div class="form-group d-flex align-items-center">
+                            <img src="/static/images/icons/2892.webp" alt="Steel Hurricane +">
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="steelHurricaneBonus">
+                                <label class="custom-control-label" for="steelHurricaneBonus">5% phys + 10% mag</label>
+                            </div>
+                        </div>
+						<div class="form-group d-flex align-items-center">
+                            <img src="/static/images/icons/2892.webp" alt="Steel Hurricane + (I)">
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="steelHurricaneBonusI">
+                                <label class="custom-control-label" for="steelHurricaneBonusI">9% mag (I)</label>
+                            </div>
+                        </div>
+						<div class="form-group d-flex align-items-center">
+                            <img src="/static/images/icons/2892.webp" alt="Steel Hurricane + (III)">
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="steelHurricaneBonusIII">
+                                <label class="custom-control-label" for="steelHurricaneBonusIII">7% phys + 9% mag</label>
+                            </div>
+                        </div>
+						<div class="form-group">
+							<img src="/static/images/icons/2535.webp" alt="Exhalation of Darkness + (I)">
+								<select id="exhalationBonus" class="form-select">
+									<option value="0">0%</option>
+									<option value="3">3%</option>
+									<option value="5.5">5.5%</option>
+									<option value="8">8%</option>
+								</select>(I)
+						</div>
+						<div class="form-group">
+							<img src="/static/images/icons/2516.webp" alt="Thorn of Death + (III)">
+								<select id="thornOfDeathBonus" class="form-select">
+									<option value="0">0%</option>
+									<option value="2.5">2.5%</option>
+									<option value="5">5%</option>
+									<option value="7.5">7.5%</option>
+								</select>(III)
+						</div>
+						<div class="form-group d-flex align-items-center">
+                            <img src="/static/images/icons/3096.webp" alt="Sharp Shadow + (II)">
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="sharpShadowBonus">
+                                <label class="custom-control-label" for="sharpShadowBonus">2% (II)</label>
+                            </div>
+                        </div>
+						<div class="form-group">
+							<img src="/static/images/icons/5315.webp" alt="Knights Curse + (I)">
+								<select id="knightsCurseBonus" class="form-select">
+									<option value="0">0%</option>
+									<option value="1.5">1.5%</option>
+									<option value="3">3%</option>
+									<option value="4.5">4.5%</option>
+								</select>(I)
+						</div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <h2>Enemy stats</h2>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <img src="/static/images/icons/542.webp" class="img-fluid" alt="icon">
+                                <input type="number" class="form-control" step="any" id="targetPhysicalDefence" oninput="calculatePercentage()" placeholder="6500">
+                                <input type="number" class="form-control" step="any" id="targetPhysicalDefencePercent" oninput="calculateValue()" placeholder="50%">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <img src="/static/images/icons/896.webp" class="img-fluid" alt="icon">
+                                <input type="number" class="form-control" step="any" id="targetMagicalDefence" oninput="calculatePercentage()" placeholder="6500">
+                                <input type="number" class="form-control" step="any" id="targetMagicalDefencePercent" oninput="calculateValue()" placeholder="50%">
+                            </div>
+                        </div>
+                        <script>
+                            function calculatePercentage() {
+                                var targetPhysicalDefence = parseFloat(document.getElementById('targetPhysicalDefence').value);
+                                var targetPhysicalDefencePercent = targetPhysicalDefence / (targetPhysicalDefence + 6500);
+                                if (!isNaN(targetPhysicalDefencePercent)) {
+                                    document.getElementById('targetPhysicalDefencePercent').value = (targetPhysicalDefencePercent * 100).toFixed(2);
+                                } else {
+                                    document.getElementById('targetPhysicalDefencePercent').value = '';
+                                }
+
+                                var targetMagicalDefence = parseFloat(document.getElementById('targetMagicalDefence').value);
+                                var targetMagicalDefencePercent = targetMagicalDefence / (targetMagicalDefence + 6500);
+                                if (!isNaN(targetMagicalDefencePercent)) {
+                                    document.getElementById('targetMagicalDefencePercent').value = (targetMagicalDefencePercent * 100).toFixed(2);
+                                } else {
+                                    document.getElementById('targetMagicalDefencePercent').value = '';
+                                }
+                            }
+
+                            function calculateValue() {
+                                var targetPhysicalDefencePercent = (parseFloat(document.getElementById('targetPhysicalDefencePercent').value) || 0) / 100;
+                                var targetPhysicalDefence = (targetPhysicalDefencePercent * 6500) / (1 - targetPhysicalDefencePercent);
+                                if (!isNaN(targetPhysicalDefence)) {
+                                    document.getElementById('targetPhysicalDefence').value = targetPhysicalDefence.toFixed(2);
+                                } else {
+                                    document.getElementById('targetPhysicalDefence').value = '';
+                                }
+
+                                var targetMagicalDefencePercent = (parseFloat(document.getElementById('targetMagicalDefencePercent').value) || 0) / 100;
+                                var targetMagicalDefence = (targetMagicalDefencePercent * 6500) / (1 - targetMagicalDefencePercent);
+                                if (!isNaN(targetMagicalDefence)) {
+                                    document.getElementById('targetMagicalDefence').value = targetMagicalDefence.toFixed(2);
+                                } else {
+                                    document.getElementById('targetMagicalDefence').value = '';
+                                }
+                            }
+                        </script>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <img src="/static/images/icons/552.webp" class="img-fluid" alt="icon">
+                                <input type="number" class="form-control" id="targetResilience" step="any">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                        <div class="custom-control custom-switch">
+                            <input type="checkbox" class="custom-control-input" id="pvpSwitch">
+                            <label class="custom-control-label" for="pvpSwitch">PVE/PVP</label>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center mt-3">
+                    <button type="submit" class="btn btn-primary btn-lg mx-auto">Calculate!</button>
+                </div>
+        </form>
+        </div>
+
+        <div class="container mt-5">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th style="width: 130px;">Skill</th>
+                    <th>Level 1</th>
+                    <th>Level 2</th>
+                    <th>Level 3</th>
+                    <th>Level 4</th>
+                    <th>Level 5</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr id="thornOfDeathRow">
+                    <td style="display: flex; align-items: center;">
+                        <div style="display: inline-block;">
+                            <img src="/static/images/dk/thornofdeath.png" alt="Thorn of Death">
+                        </div>
+                    </td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                </tr>
+                <tr id="exhalationOfDarknessRow">
+                    <td><img src="/static/images/dk/exhalationofdarkness.png" alt="Exhalation of Darkness"></td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                </tr>
+				<tr id="steelHurricaneRow">
+                    <td><img src="/static/images/dk/steelhurricane.png" alt="Steel Hurricane"></td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                </tr>
+                <tr id="enjoyingBloodRow">
+                    <td><img src="/static/images/dk/enjoyingblood.png" alt="Enjoying blood"></td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                </tr>
+                <tr id="enjoyingBloodHealRow">
+                    <td><img src="/static/images/dk/enjoyingblood.png" alt="Enjoying blood">(Heal)</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                </tr>
+                <tr id="sharpShadowRow">
+                    <td><img src="/static/images/dk/sharpshadow.png" alt="Sharp Shadow"></td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                </tr>
+                <tr id="sharpShadowHealRow">
+                    <td><img src="/static/images/dk/sharpshadow.png" alt="Sharp Shadow">(Heal)</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                </tr>
+                <tr id="knightsCurseRow">
+                    <td><img src="/static/images/dk/knightscurse.png" alt="Knights Curse"></td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                </tr>
+                <tr id="echoOfForsakenRow">
+                    <td><img src="/static/images/dk/echoofforsaken.png" alt="Echo Of Forsaken"></td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="static/js/deadknight.js"></script>
+    <script src="/static/js/theme.js"></script>
+</body>
+</html>

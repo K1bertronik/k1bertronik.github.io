@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <title>Warspear Skills Calculator</title>
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar navbar-expand-md navbar-light bg-light">
+            <button id="toggle-theme-button" style="padding: 0; border: none; background: none; margin-right: 5px;">
+                <img src="/static/images/theme.png" alt="Change theme" style="margin: 0">
+            </button>
+            <a class="navbar-brand" href="/index.html">
+                Warspear Skills Calculator
+            </a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about.html">About</a>
+                    </li>
+                </ul>
+            </div>
+            <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </nav>
+
+        <div class="container">
+            <form id="calcForm">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h2>Your stats</h2>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <img src="/static/images/icons/897.webp" class="img-fluid" alt="icon">
+                                <input type="number" class="form-control" id="magicdmg" step="any">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <img src="/static/images/icons/556.webp" class="img-fluid" alt="icon">
+                                <input type="number" class="form-control" id="penetration" step="any">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <img src="/static/images/icons/3574.webp" class="img-fluid" alt="icon">
+                                <input type="number" class="form-control" id="ferocity" step="any">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <img src="/static/images/icons/89.webp" class="img-fluid" alt="icon">
+                                <input type="number" class="form-control" id="health" step="any">
+                            </div>
+                        </div>
+                        <div class="form-group d-flex align-items-center">
+                            <img src="/static/images/icons/4064.webp" alt="Castle attack">
+                            <select id="castleDmg" class="form-select">
+                                <option value="0">0%</option>
+                                <option value="5">5%</option>
+                                <option value="7.5">7.5%</option>
+                                <option value="10">10%</option>
+                                <option value="12.5">12.5%</option>
+                                <option value="15">15%</option>
+                            </select>
+                            <img src="/static/images/icons/4392.webp" alt="Exclusive Attack" style="margin-left: 8px;">
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="exclusiveAttackBonus">
+                                <label class="custom-control-label" for="exclusiveAttackBonus">10%</label>
+                            </div>
+                        </div>
+                        <div class="form-group d-flex align-items-center">
+                            <img src="/static/images/icons/4396.webp" alt="United Attack">
+                            <select id="unitedAttackBonus" class="form-select">
+                                <option value="0">0%</option>
+                                <option value="6">6%</option>
+                                <option value="8">8%</option>
+                                <option value="10">10%</option>
+                                <option value="12">12%</option>
+                            </select>
+                            <img src="/static/images/icons/3702.webp" alt="12% relic" style="margin-left: 8px;">
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="relicBonus">
+                                <label class="custom-control-label" for="relicBonus">12%</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <img src="/static/images/icons/4063.webp" alt="Castle heal">
+                            <select id="castleHeal" class="form-select">
+                                <option value="0">0%</option>
+                                <option value="10">10%</option>
+                                <option value="15">15%</option>
+                                <option value="20">20%</option>
+                                <option value="25">25%</option>
+                                <option value="30">30%</option>
+                            </select>
+                            <img src="/static/images/icons/4151.webp" alt="Healing potion">
+                            <select id="healPot" class="form-select">
+                                <option value="0">0%</option>
+                                <option value="30">30%</option>
+                                <option value="60">60%</option>
+                            </select>
+                        </div>
+
+                        <h2>Your talents</h2>
+                        <div class="form-group">
+                            <img src="/static/images/icons/5924.webp" alt="Bestial rage">
+                            <select id="pveBonusI" class="form-select">
+                                <option value="0">0%</option>
+                                <option value="1">1%</option>
+                                <option value="2">2%</option>
+                                <option value="3">3%</option>
+                            </select>
+
+                            <img src="/static/images/icons/6989.webp" alt="Predatory delirium">
+                            <select id="pveBonusII" class="form-select">
+                                <option value="0">0%</option>
+                                <option value="1">1%</option>
+                                <option value="1.5">1.5%</option>
+                                <option value="2">2%</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <img src="/static/images/icons/5889.webp" alt="Healing Power">
+                            <select id="healBonus" class="form-select">
+                                <option value="0">0%</option>
+                                <option value="1">1%</option>
+                                <option value="2">2%</option>
+                                <option value="3">3%</option>
+                            </select>
+                        </div>
+                        <div class="form-group d-flex align-items-center">
+                            <img src="/static/images/icons/6219.webp" alt="Favor of Spirits">
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="favorOfSpirits">
+                                <label class="custom-control-label" for="favorOfSpirits" >10%</label>
+                            </div>
+                            <img src="/static/images/icons/3460.webp" alt="Healing Totem +" style="margin-left: 25px;">
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="healTotemBonus">
+                                <label class="custom-control-label" for="healTotemBonus">2%</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <img src="/static/images/icons/2886.webp" alt="Fire Totem +">
+                            <select id="fireTotemBonus" class="form-select">
+                                <option value="0">0%</option>
+                                <option value="2">2%</option>
+                                <option value="4">4%</option>
+                                <option value="6">6%</option>
+                            </select>
+                        </div>
+                        <div class="form-group d-flex align-items-center">
+                            <img src="/static/images/icons/6218.webp" alt="Static Discharge">
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="staticDischarge">
+                                <label class="custom-control-label" for="staticDischarge">20%</label>
+                            </div>
+                        </div>
+                        <div class="form-group d-flex align-items-center">
+                        <img src="/static/images/icons/2844.webp" alt="Lightning Shield + (I)">
+                            <select id="lightningShieldBonusI" class="form-select">
+                                <option value="0">0%</option>
+                                <option value="2">2%</option>
+                                <option value="4">4%</option>
+                                <option value="6">6%</option>
+                            </select>(I)
+                        <img src="/static/images/icons/2844.webp" alt="Lightning Shield + (II)" style="margin-left: 10px;">
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="lightningShieldBonusII">
+                                <label class="custom-control-label" for="lightningShieldBonusII">6% (II)</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <img src="/static/images/icons/460.webp" alt="Healing Spirit + (I/III)">
+                            <select id="healingSpiritBonus" class="form-select">
+                                <option value="0">0%</option>
+                                <option value="1">1%</option>
+                                <option value="2">2%</option>
+                                <option value="3">3%</option>
+                            </select>(I / III)
+                        </div>
+                        <div class="form-group">
+                            <img src="/static/images/icons/466.webp" alt="Lightning Ball + (II)">
+                            <select id="lightningBallBonus" class="form-select">
+                                <option value="0">0%</option>
+                                <option value="2">2%</option>
+                                <option value="4">4%</option>
+                                <option value="6">6%</option>
+                            </select>(II)
+                        </div>
+                        <div class="form-group">
+                            <img src="/static/images/icons/450.webp" alt="Earthquake + (II)">
+                            <select id="earthquakeBonus" class="form-select">
+                                <option value="0">0%</option>
+                                <option value="2.5">2.5%</option>
+                                <option value="5">5%</option>
+                                <option value="7.5">7.5%</option>
+                            </select>(II)
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <img src="/static/images/icons/6856.webp" alt="Healing Rite (III)">
+                                <input type="number" class="form-control" id="healingRiteBonus" min="0" max="50">
+                            </div>(From 1% to 50%)
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <h2>Enemy stats</h2>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <img src="/static/images/icons/896.webp" class="img-fluid" alt="icon">
+                                <input type="number" class="form-control" id="targetMagicalDefence">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <img src="/static/images/icons/552.webp" class="img-fluid" alt="icon">
+                                <input type="number" class="form-control" id="targetResilience" step="any">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                        <div class="custom-control custom-switch">
+                            <input type="checkbox" class="custom-control-input" id="pvpSwitch">
+                            <label class="custom-control-label" for="pvpSwitch">PVE/PVP</label>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center mt-3">
+                    <button type="submit" class="btn btn-primary btn-lg mx-auto">Calculate!</button>
+                </div>
+        </form>
+        </div>
+
+        <div class="container mt-5">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th style="width: 130px;">Skill</th>
+                    <th>Level 1</th>
+                    <th>Level 2</th>
+                    <th>Level 3</th>
+                    <th>Level 4</th>
+                    <th>Level 5</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr id="lightningBallRow">
+                    <td style="display: flex; align-items: center;">
+                        <div style="display: inline-block;">
+                            <img src="/static/images/shaman/lightningball.png" alt="Lightning Ball">
+                        </div>
+                    </td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                </tr>
+                <tr id="healingSpiritRow">
+                    <td><img src="/static/images/shaman/healingspirit.png" alt="Healing Spirit"></td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                </tr>
+                <tr id="earthquakeRow">
+                    <td><img src="/static/images/shaman/earthquake.png" alt="Earthquake"></td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                </tr>
+                <tr id="lightningShieldRow">
+                    <td><img src="/static/images/shaman/lightningshield.png" alt="Lightning Shield"></td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                </tr>
+                <tr id="fireTotemRow">
+                    <td><img src="/static/images/shaman/firetotem.png" alt="Fire Totem"></td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                </tr>
+                <tr id="fireTotemTickRow">
+                    <td><img src="/static/images/shaman/firetotem.png" alt="Fire Totem">(Tick)</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                </tr>
+                <tr id="ancestorsHandRow">
+                    <td><img src="/static/images/shaman/ancestorshand.png" alt="Ancestors Hand"></td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                </tr>
+                <tr id="healTotemRow">
+                    <td><img src="/static/images/shaman/healtotem.png" alt="Healing Totem"></td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                </tr>
+                <tr id="elictrificationRow">
+                    <td><img src="/static/images/shaman/elictrification.png" alt="Electrification"></td>
+                    <td>0</td>
+                </tr>
+                <tr id="ancestralCharmRow">
+                    <td><img src="/static/images/shaman/ancestralcharm.png" alt="Ancestral Charm"></td>
+                    <td>0</td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="static/js/shaman.js"></script>
+    <script src="/static/js/theme.js"></script>
+</body>
+</html>
