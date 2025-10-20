@@ -13,12 +13,28 @@ document.getElementById('calcForm').addEventListener('submit', function(event) {
   
     const results = {
         autoattack: Autoattack(params),
-
+        thornOfDeath: ThornOfDeath(params),
+        exhalationOfDarkness: ExhalationOfDarkness(params),
+        steelHurricane: SteelHurricane(params),
+        enjoyingBlood: EnjoyingBlood(SteelHurricane(params)),
+        enjoyingBloodHeal: EnjoyingBloodHeal(EnjoyingBlood(SteelHurricane(params)), params),
+        sharpShadow: SharpShadow(params),
+        sharpShadowHeal: SharpShadowHeal(params),
+        knightsCurse: KnightsCurse(params),
+        knightsCurseExplode: KnightsCurseExplode(params),
       };
       
       const rowsMap = {
         autoattack: "autoattackRow",
-
+        thornOfDeath: "thornOfDeathRow",
+        exhalationOfDarkness: "exhalationOfDarknessRow",
+        steelHurricane: "steelHurricaneRow",
+        enjoyingBlood: "enjoyingBloodRow",
+        enjoyingBloodHeal: "enjoyingBloodHealRow",
+        sharpShadow: "sharpShadowRow",
+        sharpShadowHeal: "sharpShadowHealRow",
+        knightsCurse: "knightsCurseRow",
+        knightsCurseExplode: "knightsCurseExplodeRow",
       };
       
   
@@ -58,11 +74,24 @@ function collectBonusModifiers() {
         castleHeal: (parseFloat(document.getElementById('castleHeal').value) || 0) / 100,
         potHeal: (parseFloat(document.getElementById('potHeal').value) || 0) / 100,
 
-
         pveBonusI: (parseFloat(document.getElementById('pveBonusI').value) || 0) / 100,
         pveBonusII: (parseFloat(document.getElementById('pveBonusII').value) || 0) / 100,
 
-        
+        steelHurricaneBonus: document.getElementById('steelHurricaneBonus').checked,
+        steelHurricaneBonusI: document.getElementById('steelHurricaneBonusI').checked ? 0.09 : 0,
+        steelHurricaneBonusIII: document.getElementById('steelHurricaneBonusIII').checked,
+        steelHurricaneBonusAlm: (document.getElementById('steelHurricaneBonusAlm').value).split(','),
+
+        exhalationBonusI: (parseFloat(document.getElementById('exhalationBonusI').value) || 0) / 100,
+
+        thornOfDeathBonus: (parseFloat(document.getElementById('thornOfDeathBonus').value) || 0) / 100,
+        thornOfDeathBonusAlm: (parseFloat(document.getElementById('thornOfDeathBonusAlm').value) || 0) / 100,
+
+        sharpShadowBonusII: document.getElementById('sharpShadowBonusII').checked ? 0.02 : 0,
+
+        knightsCurseBonusI: (parseFloat(document.getElementById('knightsCurseBonusI').value) || 0) / 100,
+
+        screamBattleBonus: document.getElementById('screamBattleBonus').checked ? 0.08 : 0,
     };
 }
 
@@ -70,7 +99,6 @@ function calculateDamage(rawDamageLevels, params, options = {}) {
     const {
         isSkill = true,
         damageType = 'physical',
-        isTalent = false,
     } = options;
 
     const { player, target, bonus } = params;
@@ -96,10 +124,10 @@ function calculateDamage(rawDamageLevels, params, options = {}) {
 
     const skillPower = isSkill ? player.skillPower : 0;
 
-    const pveBonusI = (isSkill && !isPVP && !isTalent) ? bonus.pveBonusI : 0;
+    const pveBonusI = (isSkill && !isPVP) ? bonus.pveBonusI : 0;
     const pveBonusII = !isPVP ? bonus.pveBonusII : 0;
 
-    const bondsBonusAlm = bonus.bondsBonusAlm;
+    const screamBattleBonus = (isSkill && !isPVP) ? bonus.screamBattleBonus : 0;
 
     for (let i = 0; i < rawDamageLevels.length; i++) {
         const base = rawDamageLevels[i];
@@ -110,7 +138,8 @@ function calculateDamage(rawDamageLevels, params, options = {}) {
             * (1 - resilience)
             * (1 + pveBonusI)
             * (1 + pveBonusII)
-            * (1 + skillPower);
+            * (1 + skillPower)
+            * (1 + screamBattleBonus);
 
         totalDamageLevels.push(parseFloat(total.toFixed(2)));
     }
@@ -137,143 +166,191 @@ function calculateHeal(skillHealLevels, params) {
 function Autoattack(params){
     const damageLevels = [];
 
-    const magicalDamage = params.player.magicalDamage;
+    const physicalDamage = params.player.physicalDamage;
     const attackStrength = params.player.attackStrength;
 
-    const damage = magicalDamage * (1 + attackStrength) ;
+    const damage = physicalDamage * (1 + attackStrength) ;
 	
     damageLevels.push(damage);
 
     return calculateDamage(damageLevels, params, {
         isSkill: false,
-        damageEffectType: 'instant',
-        isTalent: false,
     });
 }
 
-function ThornOfDeath(physicalDamage){
-    var damageLevels = [];
+function ThornOfDeath(params){
+    const damageLevels = [];
 	
-	var baseValues = [20, 40, 60, 80, 100];
-    var percentageIncreases = [120.0, 125.0, 130.0, 135.0, 145.0];
+	const baseValues = [20, 40, 60, 80, 100];
+    const percentageIncreases = [120.0, 125.0, 130.0, 135.0, 145.0];
 
-    var relicBonus = document.getElementById('relicBonus').checked ? 0.12 : 0;
-    var unitedBonus = (parseFloat(document.getElementById('unitedAttackBonus').value) || 0) / 100;
+    const physicalDamage = params.player.physicalDamage;
 
-    var thornOfDeathBonus = (parseFloat(document.getElementById('thornOfDeathBonus').value) || 0) / 100;
+    const relicBonus = params.bonus.relicBonus;
+    const unitedBonus = params.bonus.unitedAttackBonus;
 
-    for (var level = 0; level < 5; level++) {
-        var damage = baseValues[level] + physicalDamage * (percentageIncreases[level] / 100 + thornOfDeathBonus) * (1 + relicBonus + unitedBonus);
+    const thornOfDeathBonus = params.bonus.thornOfDeathBonus;
+    const thornOfDeathBonusAlm = params.bonus.thornOfDeathBonusAlm;
+
+    for (let level = 0; level < 5; level++) {
+        const damage = baseValues[level] + physicalDamage * (percentageIncreases[level] / 100 + thornOfDeathBonus + thornOfDeathBonusAlm) * (1 + relicBonus + unitedBonus);
         damageLevels.push(damage);
     }
 
-    return damageLevels;
+    return calculateDamage(damageLevels, params, { });
 }
 
-function ExhalationOfDarkness(magicalDamage){
-    var damageLevels = [];
+function ExhalationOfDarkness(params){
+    const damageLevels = [];
 	
-	var baseValues = [30, 55, 80, 105, 130];
-    var percentageIncreases = [110.0, 120.0, 130.0, 145.0, 160.0];
+	const baseValues = [30, 55, 80, 105, 130];
+    const percentageIncreases = [110.0, 120.0, 130.0, 145.0, 160.0];
 
-    var relicBonus = document.getElementById('relicBonus').checked ? 0.12 : 0;
-    var exhalationBonus = (parseFloat(document.getElementById('exhalationBonus').value) || 0) / 100;
+    const magicalDamage = params.player.magicalDamage;
 
-    for (var level = 0; level < 5; level++) {
-        var damage = baseValues[level] + magicalDamage * (percentageIncreases[level] / 100 + exhalationBonus) * (1 + relicBonus);
+    const relicBonus = params.bonus.relicBonus;
+    const exhalationBonusI = params.bonus.exhalationBonusI;
+
+    for (let level = 0; level < 5; level++) {
+        const damage = baseValues[level] + magicalDamage * (percentageIncreases[level] / 100 + exhalationBonusI) * (1 + relicBonus);
         damageLevels.push(damage);
     }
 
-    return damageLevels;
+    return calculateDamage(damageLevels, params, {
+        damageType: "magical",
+    });
 }
 
-function SteelHurricane(physicalDamage, magicalDamage){
-    var damageLevels = [];
+function SteelHurricane(params){
+    const damageLevels = [];
 	
-    var percentagePhysIncreases = [105.0, 110.0, 120.0, 135.0];
-	var percentageMagIncreases = [130.0, 140.0, 155.0, 175.0];
+    const percentagePhysIncreases = [105.0, 110.0, 120.0, 135.0];
+	const percentageMagIncreases = [130.0, 140.0, 155.0, 175.0];
+
+    const physicalDamage = params.player.physicalDamage;
+    const magicalDamage = params.player.magicalDamage;
+
+    const steelHurricaneBonus = params.bonus.steelHurricaneBonus ? [0.05, 0.1] : [0, 0];
+    const steelHurricaneBonusI = params.bonus.steelHurricaneBonusI;
+    const steelHurricaneBonusIII = params.bonus.steelHurricaneBonusIII ? [0.07, 0.09] : [0, 0];
+    const steelHurricaneBonusAlm = params.bonus.steelHurricaneBonusAlm;
 	
-    var steelHurricanePhysBonus = (document.getElementById('steelHurricaneBonus').checked ? 0.05 : 0) + (document.getElementById('steelHurricaneBonusIII').checked ? 0.07 : 0);
-	var steelHurricaneMagBonus = (document.getElementById('steelHurricaneBonus').checked ? 0.10 : 0) + (document.getElementById('steelHurricaneBonusI').checked ? 0.9 : 0) + (document.getElementById('steelHurricaneBonusIII').checked ? 0.9 : 0);
-	
-    for (var level = 0; level < 4; level++) {
+    for (let level = 0; level < 4; level++) {
         if (physicalDamage > magicalDamage) {
-            var damage = physicalDamage * (percentagePhysIncreases[level] / 100 + steelHurricanePhysBonus);
+            var damage = physicalDamage * (percentagePhysIncreases[level] / 100 + steelHurricaneBonus[0] + steelHurricaneBonusIII[0] + parseFloat(steelHurricaneBonusAlm[0]) / 100);
+            damageLevels.push(damage);
         } else {
-            var damage = magicalDamage * (percentageMagIncreases[level] / 100 + steelHurricaneMagBonus);
+            var damage = magicalDamage * (percentageMagIncreases[level] / 100 + steelHurricaneBonus[1] + steelHurricaneBonusI + steelHurricaneBonusIII[1] + parseFloat(steelHurricaneBonusAlm[1]) / 100);
+            damageLevels.push(damage);
         }
-        damageLevels.push(damage);
     }
 
-    return damageLevels;
+    if (physicalDamage > magicalDamage) {
+        return calculateDamage(damageLevels, params, { });
+    } else {
+        return calculateDamage(damageLevels, params, {
+            damageType: "magical",
+        });
+    }
 }
 
 function EnjoyingBlood(skillLevels){
-	var damageLevels = [];
-    var healLevels = [];
+	const damageLevels = [];
 
-    var percentageDamageIncrease = 0.25;
-	var percentageHealIncrease = 0.60;
+    const percentageDamageIncrease = 0.25;
 
-    for (var level = 0; level < 4; level++) {
-        var damage = skillLevels[level] * percentageDamageIncrease;
-		var heal = damage * percentageHealIncrease;
+    for (let level = 0; level < 4; level++) {
+        const damage = skillLevels[level] * percentageDamageIncrease;
 		
 		damageLevels.push(parseFloat(damage.toFixed(2)));
-		healLevels.push(parseFloat(heal.toFixed(2)));
     }
 
-    return [damageLevels, healLevels];
+    return damageLevels;
 }
 
-function SharpShadow(magicalDamage, physicalDamage, health){
-	var damageLevels = [];
-    var healLevels = [];
+function EnjoyingBloodHeal(skillLevels, params){
+    const healLevels = [];
+	const percentageHealIncrease = 0.60;
+
+    for (let level = 0; level < 4; level++) {
+		const heal = skillLevels[level] * percentageHealIncrease;
+
+		healLevels.push(heal);
+    }
+
+    return calculateHeal(healLevels, params);
+}
+
+function SharpShadow(params){
+	const damageLevels = [];
 	
-	var percentagePhysIncreases = [50.0, 55.0, 65.0, 80.0];
-	var percentageMagIncreases = [135.0, 145.0, 160.0, 180.0];
-	var percentageHealIncreases = [7.0, 9.0, 11.0, 14.0];
+	const percentagePhysIncreases = [50.0, 55.0, 65.0, 80.0];
+	const percentageMagIncreases = [135.0, 145.0, 160.0, 180.0];
+
+    const physicalDamage = params.player.physicalDamage;
+    const magicalDamage = params.player.magicalDamage;
 	
-	var sharpShadowBonus = document.getElementById('sharpShadowBonus').checked ? 0.02 : 0;
-	
-	for (var level = 0; level < 4; level++) {
-        var damage = magicalDamage * (percentageMagIncreases[level] / 100) + physicalDamage * (percentagePhysIncreases[level] / 100);
-		var heal = health * (percentageHealIncreases[level] / 100 + sharpShadowBonus);
+	for (let level = 0; level < 4; level++) {
+        const damage = magicalDamage * (percentageMagIncreases[level] / 100) + physicalDamage * (percentagePhysIncreases[level] / 100);
 		
 		damageLevels.push(damage);
+    }
+	
+	return calculateDamage(damageLevels, params, {
+        damageType: "magical",
+    });
+}
+
+function SharpShadowHeal(params){
+    const healLevels = [];
+
+	const percentageHealIncreases = [7.0, 9.0, 11.0, 14.0];
+
+    const health = params.player.health;
+	
+	const sharpShadowBonusII = params.bonus.sharpShadowBonusII;
+	
+	for (let level = 0; level < 4; level++) {
+		const heal = health * (percentageHealIncreases[level] / 100) * (1 + sharpShadowBonusII);
+
 		healLevels.push(heal);
     }
 	
-	return [damageLevels, healLevels];
+	return calculateHeal(healLevels, params);
 }
 
-function KnightsCurse(magicalDamage, isForsaken = false){
-    var damageLevels = [];
+function KnightsCurse(params){
+    const damageLevels = [];
 	
-    var percentageIncreases = [55.0, 65.0, 75.0, 85.0];
-	var percentageBoostIncreases = [10.0, 15.0, 20.0, 25.0]; 
-	
-    var knightsCurseBonus = (parseFloat(document.getElementById('knightsCurseBonus').value) || 0) / 100;
+    const percentageIncreases = [55.0, 65.0, 75.0, 85.0];
 
-    for (var level = 0; level < 4; level++) {
-        var damage = magicalDamage * (percentageIncreases[level] / 100 + knightsCurseBonus) * (1 + (isForsaken ? 0 : percentageBoostIncreases[level] / 100));
+    const magicalDamage = params.player.magicalDamage;
+	
+    const knightsCurseBonusI = params.bonus.knightsCurseBonusI;
+
+    for (let level = 0; level < 4; level++) {
+        const damage = magicalDamage * (percentageIncreases[level] / 100 + knightsCurseBonusI);
         damageLevels.push(damage);
     }
 
-    return damageLevels;
+    return calculateDamage(damageLevels, params, {
+        damageType: "magical",
+    });
 }
 
-function KnightsCurseExplode(physicalDamage){
-    var damageLevels = [];
+function KnightsCurseExplode(params){
+    const damageLevels = [];
 	
-    var percentageIncreases = [100.0, 115.0, 135.0, 160.0];
+    const percentageIncreases = [100.0, 115.0, 135.0, 160.0];
 
-    for (var level = 0; level < 4; level++) {
-        var damage = physicalDamage * (percentageIncreases[level] / 100);
+    const physicalDamage = params.player.physicalDamage;
+
+    for (let level = 0; level < 4; level++) {
+        const damage = physicalDamage * (percentageIncreases[level] / 100);
         damageLevels.push(damage);
     }
 
-    return damageLevels;
+    return calculateDamage(damageLevels, params, { });
 }
 
 function updateDamageValues(damageList, rowId) {

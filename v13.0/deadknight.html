@@ -143,7 +143,7 @@
                             <img src="/static/images/icons/2892.webp" alt="Steel Hurricane + (III)">
                             <div class="custom-control custom-switch">
                                 <input type="checkbox" class="custom-control-input" id="steelHurricaneBonusIII">
-                                <label class="custom-control-label" for="steelHurricaneBonusIII">7% phys + 9% mag</label>
+                                <label class="custom-control-label" for="steelHurricaneBonusIII">7% phys + 9% mag (III)</label>
                             </div>
                         </div>
                         <div class="form-group">
@@ -156,7 +156,7 @@
                         </div>
 						<div class="form-group">
 							<img src="/static/images/icons/2535.webp" alt="Exhalation of Darkness + (I)">
-								<select id="exhalationBonus" class="form-select">
+								<select id="exhalationBonusI" class="form-select">
 									<option value="0">0%</option>
 									<option value="3">3%</option>
 									<option value="5.5">5.5%</option>
@@ -181,13 +181,13 @@
 						<div class="form-group d-flex align-items-center">
                             <img src="/static/images/icons/3096.webp" alt="Sharp Shadow + (II)">
                             <div class="custom-control custom-switch">
-                                <input type="checkbox" class="custom-control-input" id="sharpShadowBonus">
-                                <label class="custom-control-label" for="sharpShadowBonus">2% (II)</label>
+                                <input type="checkbox" class="custom-control-input" id="sharpShadowBonusII">
+                                <label class="custom-control-label" for="sharpShadowBonusII">2% (II)</label>
                             </div>
                         </div>
 						<div class="form-group">
 							<img src="/static/images/icons/5315.webp" alt="Knights Curse + (I)">
-								<select id="knightsCurseBonus" class="form-select">
+								<select id="knightsCurseBonusI" class="form-select">
 									<option value="0">0%</option>
 									<option value="1.5">1.5%</option>
 									<option value="3">3%</option>
@@ -263,10 +263,16 @@
                             </div>
                         </div>
                         <div class="form-group">
-                        <div class="custom-control custom-switch">
-                            <input type="checkbox" class="custom-control-input" id="pvpSwitch">
-                            <label class="custom-control-label" for="pvpSwitch">PVE/PVP</label>
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="pvpSwitch">
+                                <label class="custom-control-label" for="pvpSwitch">PVE/PVP</label>
+                            </div>
                         </div>
+                        <div class="form-group text-center">
+                            <p>
+                                [Not verified]
+                            </p>
+                            <img src="#" alt="" style="all: unset;">
                         </div>
                     </div>
                 </div>
@@ -289,6 +295,14 @@
                 </tr>
             </thead>
             <tbody>
+                <tr id="autoattackRow">
+                    <td style="display: flex; align-items: center;">
+                        <div style="display: inline-block;">
+                            <img src="/static/images/icons/4359.webp" alt="Autoattack">(Auto)
+                        </div>
+                    </td>
+                    <td>0</td>
+                </tr>
                 <tr id="thornOfDeathRow">
                     <td style="display: flex; align-items: center;">
                         <div style="display: inline-block;">
@@ -353,13 +367,6 @@
                 </tr>
                 <tr id="knightsCurseExplodeRow">
                     <td><img src="/static/images/dk/knightscurse.png" alt="Knights Curse">(Explode)</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                </tr>
-                <tr id="echoOfForsakenRow">
-                    <td><img src="/static/images/dk/echoofforsaken.png" alt="Echo Of Forsaken"></td>
                     <td>0</td>
                     <td>0</td>
                     <td>0</td>

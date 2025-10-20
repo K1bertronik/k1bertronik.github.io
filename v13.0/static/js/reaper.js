@@ -107,7 +107,6 @@ function calculateDamage(rawDamageLevels, params, options = {}) {
     const {
         isSkill = true,
         damageEffectType = 'instant',
-        isTalent = false,
         isDemonic= false,
     } = options;
 
@@ -133,7 +132,7 @@ function calculateDamage(rawDamageLevels, params, options = {}) {
 
     const skillPower = isSkill ? player.skillPower : 0;
 
-    const pveBonusI = (isSkill && !isPVP && !isTalent) ? bonus.pveBonusI : 0;
+    const pveBonusI = (isSkill && !isPVP) ? bonus.pveBonusI : 0;
     const pveBonusII = !isPVP ? bonus.pveBonusII : 0;
     const toughnessBonus = !isPVP ? bonus.toughnessBonus : 0;
 
@@ -200,7 +199,6 @@ function Autoattack(params){
     return calculateDamage(damageLevels, params, {
         isSkill: false,
         damageEffectType: 'instant',
-        isTalent: false,
     });
 }
 
