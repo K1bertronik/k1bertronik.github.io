@@ -312,7 +312,7 @@ function UnderworldHand(params){
 
     for (let level = 0; level < 4; level++) {
         const damage = physicalDamage * (percentageIncreases[level] / 100 + underworldHandBonusAlm);
-        damageLevels.push(damage);
+        damageLevels.push(damage * 2);
     }
 
     return calculateDamage(damageLevels, params, { });

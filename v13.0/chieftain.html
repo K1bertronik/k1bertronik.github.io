@@ -36,13 +36,25 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <img src="/static/images/icons/89.webp" class="img-fluid" alt="icon">
-                                <input type="number" class="form-control" id="health" step="any">
+                                <input type="number" class="form-control" id="maxHealth" step="any" placeholder="Max health">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <img src="/static/images/icons/89.webp" class="img-fluid" alt="icon">
+                                <input type="number" class="form-control" id="currentHealth" step="any" placeholder="Current health">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="input-group">
                                 <img src="/static/images/icons/95.webp" class="img-fluid" alt="icon">
                                 <input type="number" class="form-control" id="physdmg" step="any">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <img src="/static/images/icons/897.webp" class="img-fluid" alt="icon">
+                                <input type="number" class="form-control" id="magicdmg" step="any">
                             </div>
                         </div>
                         <div class="form-group">
@@ -67,18 +79,6 @@
                             <div class="input-group">
                                 <img src="/static/images/icons/4359.webp" class="img-fluid" alt="icon">
                                 <input type="number" class="form-control" id="attackStrength" step="any">
-                            </div>
-                        </div>
-						<div class="form-group">
-                            <div class="input-group">
-                                <img src="/static/images/icons/3828.webp" class="img-fluid" alt="icon">
-                                <input type="number" class="form-control" id="critPower" step="any">
-                            </div>
-                        </div>
-						<div class="form-group">
-                            <div class="input-group">
-                                <img src="/static/images/reaper/rage.png" class="img-fluid" alt="icon">
-                                <input type="number" class="form-control" id="rage" min="0" max="16">
                             </div>
                         </div>
                         <div class="form-group d-flex align-items-center">
@@ -176,80 +176,101 @@
                                 <option value="2">2%</option>
                             </select>
                         </div>
-                        <div class="form-group d-flex align-items-center">
-                            <img src="/static/images/icons/6378.webp" alt="Evisceration +">
-                            <div class="custom-control custom-switch">
-                                <input type="checkbox" class="custom-control-input" id="eviscerationBonus">
-                                <label class="custom-control-label" for="eviscerationBonus">5%</label>
-                            </div>
-                            <img src="/static/images/icons/6378.webp" alt="Evisceration + (I/II)" style="margin-left: 35px;">
-                            <select id="eviscerationBonusII" class="form-select">
-                                <option value="0">0%</option>
-                                <option value="2.5">2.5%</option>
-                                <option value="5">5%</option>
-                                <option value="7.5">7.5%</option>
-                            </select>(I/II)
-                        </div>
                         <div class="form-group">
-                            <img src="/static/images/icons/6378.webp" alt="Evisceration + (Alm)">
-                            <select id="eviscerationBonusAlm" class="form-select">
-                                <option value="0">0%</option>
-                                <option value="2.5">2.5%</option>
-                                <option value="5">5%</option>
-                            </select>(Almahad)
-                        </div>
-                        <div class="form-group">
-                            <img src="/static/images/icons/6392.webp" alt="Explodion of Chaos +">
-                            <select id="explodionBonus" class="form-select">
+                            <img src="/static/images/icons/5908.webp" alt="Shivering Earth">
+                            <select id="shivEarthBonus" class="form-select">
                                 <option value="0">0%</option>
                                 <option value="2">2%</option>
                                 <option value="4">4%</option>
                                 <option value="6">6%</option>
+                                <option value="8">8%</option>
+                                <option value="10">10%</option>
                             </select>
-                            <img src="/static/images/icons/6392.webp" alt="Explodion of Chaos + (Almahad)">
-                            <select id="explodionBonusAlm" class="form-select">
-                                <option value="0">0%</option>
-                                <option value="3">3%</option>
-                                <option value="6">6%</option>
-                            </select>(Almahad)
                         </div>
                         <div class="form-group d-flex align-items-center">
-                            <img src="/static/images/icons/6393.webp" alt="Devastating Flash">
+                            <img src="/static/images/icons/5412.webp" alt="Eagles Eye +">
                             <div class="custom-control custom-switch">
-                                <input type="checkbox" class="custom-control-input" id="devastatingFlashBonus">
-                                <label class="custom-control-label" for="devastatingFlashBonus">20%</label>
+                                <input type="checkbox" class="custom-control-input" id="eaglesEyeBonus">
+                                <label class="custom-control-label" for="eaglesEyeBonus">3%</label>
                             </div>
-                        </div>
-						<div class="form-group">
-                            <img src="/static/images/icons/6389.webp" alt="Annihilation + (II)">
-                            <select id="annihilationBonus" class="form-select">
+                            <img src="/static/images/icons/5412.webp" alt="Eagles Eye + (II)" style="margin-left: 35px;">
+                            <select id="eaglesEyeBonusII" class="form-select">
                                 <option value="0">0%</option>
+                                <option value="1">1%</option>
+                                <option value="2">2%</option>
                                 <option value="3">3%</option>
-                                <option value="6">6%</option>
-                                <option value="9">9%</option>
                             </select>(II)
                         </div>
                         <div class="form-group">
-                            <img src="/static/images/reaper/underworldhand_icon.png" alt="Underworld Hand + (Almahad)">
-                            <select id="underworldHandBonusAlm" class="form-select">
-                                <option value="0">0%</option>
-                                <option value="2.25">2.25%</option>
-                                <option value="4.5">4.5%</option>
+                            <img src="/static/images/icons/5412.webp" alt="Eagles Eye + (Almahad)">
+                            <select id="eaglesEyeBonusAlm" class="form-select">
+                                <option value="0,0">0/0%</option>
+                                <option value="0.75,1.5">0.75/1.5%</option>
+                                <option value="1.5,3">1.5/3%</option>
                             </select>(Almahad)
                         </div>
                         <div class="form-group">
-                            <img src="/static/images/reaper/bloodbath.png" alt="Bloodbath">
-                            <select id="bloodBathBonus" class="form-select">
+                            <img src="/static/images/icons/5520.webp" alt="Frenzy +">
+                            <select id="frenzyBonus" class="form-select">
                                 <option value="0">0%</option>
+                                <option value="1">1%</option>
                                 <option value="1.5">1.5%</option>
+                                <option value="2">2%</option>
+                            </select>
+                            <img src="/static/images/icons/5520.webp" alt="Frenzy + (I)">
+                            <select id="frenzyBonusI" class="form-select">
+                                <option value="0">0%</option>
+                                <option value="1">1%</option>
+                                <option value="1.5">1.5%</option>
+                                <option value="2">2%</option>
+                            </select>(I)
+                        </div>
+                        <div class="form-group">
+                            <img src="/static/images/icons/5414.webp" alt="Wolfs Alacrity + (I)">
+                            <select id="wolfsAlacrityBonusI" class="form-select">
+                                <option value="0">0%</option>
+                                <option value="1">1%</option>
+                                <option value="2">2%</option>
                                 <option value="3">3%</option>
-                                <option value="4.5">4.5%</option>
+                            </select>(I)
+                        </div>
+                        <div class="form-group d-flex align-items-center">
+                            <img src="/static/images/icons/5413.webp" alt="Bears Stamina + (II)">
+                            <select id="bearStaminaBonusII" class="form-select">
+                                <option value="0">0%</option>
+                                <option value="2">2%</option>
+                                <option value="4">4%</option>
                                 <option value="6">6%</option>
-                                <option value="7.5">7.5%</option>
+                            </select>(II)
+                            <img src="/static/images/icons/5413.webp" alt="Bears Stamina + (III)" style="margin-left: 5px;">
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="bearStaminaBonusIII">
+                                <label class="custom-control-label" for="bearStaminaBonusIII">6% (III)</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <img src="/static/images/icons/5411.webp" alt="Blow of the Spirits + (III)">
+                            <select id="blowOfSpiritsBonusIII" class="form-select">
+                                <option value="0">0%</option>
+                                <option value="3">3%</option>
+                                <option value="6">6%</option>
                                 <option value="9">9%</option>
-                                <option value="10.5">10.5%</option>
-                                <option value="12">12%</option>
+                            </select>(III)
+                            <img src="/static/images/icons/5411.webp" alt="Blow of the Spirits + (Almahad)">
+                            <select id="blowOfSpiritsBonusAlm" class="form-select">
+                                <option value="0,0">0/0%</option>
+                                <option value="2.25,3.25">2.25/3.25%</option>
+                                <option value="4.5,6.5">4.5/6.5%</option>
                             </select>(Almahad)
+                        </div>
+                        <div class="form-group">
+                            <img src="/static/images/icons/5418.webp" alt="Swooping Army + (III)">
+                            <select id="swoopingArmyBonusIII" class="form-select">
+                                <option value="0">0%</option>
+                                <option value="1">1%</option>
+                                <option value="2">2%</option>
+                                <option value="3">3%</option>
+                            </select>(III)
                         </div>
                     </div>
 
@@ -262,6 +283,13 @@
                                 <input type="number" class="form-control" step="any" id="targetPhysicalDefencePercent" oninput="calculateValue()" placeholder="50%">
                             </div>
                         </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <img src="/static/images/icons/896.webp" class="img-fluid" alt="icon">
+                                <input type="number" class="form-control" step="any" id="targetMagicalDefence" oninput="calculatePercentage()" placeholder="6500">
+                                <input type="number" class="form-control" step="any" id="targetMagicalDefencePercent" oninput="calculateValue()" placeholder="50%">
+                            </div>
+                        </div>
                         <script>
                             function calculatePercentage() {
                                 var targetPhysicalDefence = parseFloat(document.getElementById('targetPhysicalDefence').value);
@@ -270,6 +298,14 @@
                                     document.getElementById('targetPhysicalDefencePercent').value = (targetPhysicalDefencePercent * 100).toFixed(2);
                                 } else {
                                     document.getElementById('targetPhysicalDefencePercent').value = '';
+                                }
+
+                                var targetMagicalDefence = parseFloat(document.getElementById('targetMagicalDefence').value);
+                                var targetMagicalDefencePercent = targetMagicalDefence / (targetMagicalDefence + 6500);
+                                if (!isNaN(targetMagicalDefencePercent)) {
+                                    document.getElementById('targetMagicalDefencePercent').value = (targetMagicalDefencePercent * 100).toFixed(2);
+                                } else {
+                                    document.getElementById('targetMagicalDefencePercent').value = '';
                                 }
                             }
 
@@ -280,6 +316,14 @@
                                     document.getElementById('targetPhysicalDefence').value = targetPhysicalDefence.toFixed(2);
                                 } else {
                                     document.getElementById('targetPhysicalDefence').value = '';
+                                }
+
+                                var targetMagicalDefencePercent = (parseFloat(document.getElementById('targetMagicalDefencePercent').value) || 0) / 100;
+                                var targetMagicalDefence = (targetMagicalDefencePercent * 6500) / (1 - targetMagicalDefencePercent);
+                                if (!isNaN(targetMagicalDefence)) {
+                                    document.getElementById('targetMagicalDefence').value = targetMagicalDefence.toFixed(2);
+                                } else {
+                                    document.getElementById('targetMagicalDefence').value = '';
                                 }
                             }
                         </script>
@@ -297,7 +341,6 @@
                         </div>
                         <div class="form-group text-center">
                             <p>
-                                Crit damage for PvE can be slightly reduced.
                                 [Not verified]
                             </p>
                             <img src="#" alt="" style="all: unset;">
@@ -331,10 +374,10 @@
                     </td>
                     <td>0</td>
                 </tr>
-                <tr id="eviscerationRow">
+                <tr id="blowOfSpiritsRow">
                     <td style="display: flex; align-items: center;">
                         <div style="display: inline-block;">
-                            <img src="/static/images/reaper/evisceration.png" alt="Evisceration">
+                            <img src="/static/images/chieftain/blowofspirits.png" alt="Blow of the Spirits">
                         </div>
                     </td>
                     <td>0</td>
@@ -343,61 +386,69 @@
                     <td>0</td>
                     <td>0</td>
                 </tr>
-                <tr id="otherworldBoostRow">
-                    <td><img src="/static/images/reaper/otherworldboost.png" alt="Otherworld Boost"></td>
+                <tr id="eaglesEyeMagRow">
+                    <td><img src="/static/images/chieftain/eagleseye.png" alt="Eagles Eye">(Mag)</td>
                     <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-					<td>0</td>
-                </tr>
-                <tr id="annihilationRow">
-                    <td><img src="/static/images/reaper/annihilation.png" alt="Annihilation"></td>
                     <td>0</td>
                     <td>0</td>
                     <td>0</td>
                     <td>0</td>
                 </tr>
-				<tr id="annihilationCritRow">
-                    <td><img src="/static/images/reaper/annihilation.png" alt="Annihilation">(Crit)</td>
+                <tr id="eaglesEyePhysRow">
+                    <td><img src="/static/images/chieftain/eagleseye.png" alt="Eagles Eye">(Phys)</td>
                     <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                </tr>
-                <tr id="widescopeRow">
-                    <td><img src="/static/images/reaper/widescope.png" alt="Wide Scope"></td>
                     <td>0</td>
                     <td>0</td>
                     <td>0</td>
                     <td>0</td>
                 </tr>
-                <tr id="widescopeCritRow">
-                    <td><img src="/static/images/reaper/widescope.png" alt="Wide Scope">(Crit)</td>
+                <tr id="bearStaminaHealthRow">
+                    <td><img src="/static/images/chieftain/bearstamina.png" alt="Bears Stamina">(HP)</td>
                     <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                </tr>
-                <tr id="underworldHandRow">
-                    <td><img src="/static/images/reaper/underworldhand.png" alt="Hand of the Underworld"></td>
                     <td>0</td>
                     <td>0</td>
                     <td>0</td>
                     <td>0</td>
                 </tr>
-                <tr id="explosionOfChaosRow">
-                    <td><img src="/static/images/reaper/explosionofchaos.png" alt="Explosion of Chaos"></td>
+                <tr id="bearStaminaRow">
+                    <td><img src="/static/images/chieftain/bearstamina.png" alt="Bears Stamina"></td>
+                    <td>0</td>
                     <td>0</td>
                     <td>0</td>
                     <td>0</td>
                     <td>0</td>
                 </tr>
-                <tr id="demonicExplosionOfChaosRow">
-                    <td><img src="/static/images/reaper/explosionofchaos.png" alt="Explosion of Chaos">(Demon)</td>
+                <tr id="wolfsAlacrityRow">
+                    <td><img src="/static/images/chieftain/wolfsalacrity.png" alt="Wolfs Alacrity"></td>
                     <td>0</td>
                     <td>0</td>
                     <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                </tr>
+                <tr id="curseOfPlagueRow">
+                    <td><img src="/static/images/chieftain/curseofplague.png" alt="Curse of the Plague"></td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                </tr>
+                <tr id="swoopingArmyRow">
+                    <td><img src="/static/images/chieftain/swoopingarmy.png" alt="Swooping Army"></td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                </tr>
+                <tr id="frenzyRow">
+                    <td><img src="/static/images/chieftain/frenzy.png" alt="Frenzy">(Total)</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                </tr>
+                <tr id="ignitionRow">
+                    <td><img src="/static/images/chieftain/ignition.png" alt="Ignition"></td>
                     <td>0</td>
                 </tr>
             </tbody>
@@ -408,7 +459,7 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="static/js/reaper.js"></script>
+    <script src="static/js/chieftain.js"></script>
     <script src="/static/js/theme.js"></script>
 </body>
 </html>
