@@ -106,6 +106,8 @@ function collectBonusModifiers() {
 
         roaringFlameBonusAlm: (parseFloat(document.getElementById('roaringFlameBonusAlm').value) || 0) / 100,
 
+        excessEnergyBonus: document.getElementById('excessEnergyBonus').checked ? 0.14 : 0,
+
         natureBonus: document.getElementById('natureBonus').checked ? 0.10 : 0,
 
         elementalPowerBonus: (parseFloat(document.getElementById('elementalPowerBonus').value) || 0) / 100,
@@ -147,6 +149,7 @@ function calculateDamage(rawDamageLevels, params, options = {}) {
     const pveBonusII = !isPVP ? bonus.pveBonusII : 0;
     const toughnessBonus = !isPVP ? bonus.toughnessBonus : 0;
     
+    const excessEnergyBonus = bonus.excessEnergyBonus;
     const natureBonus = (damageEffectType === 'instant' && isSkill) ? bonus.natureBonus : 0;
     const elementalPowerBonus = bonus.elementalPowerBonus;
 
@@ -169,6 +172,7 @@ function calculateDamage(rawDamageLevels, params, options = {}) {
             * (1 + toughnessBonus)
             * (1 + skillPower)
             * (1 + damageBonus)
+            * (1 + excessEnergyBonus)
             * (1 + natureBonus)
             * (1 + elementalPowerBonus);
 
