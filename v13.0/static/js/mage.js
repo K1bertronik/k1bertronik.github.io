@@ -149,7 +149,7 @@ function calculateDamage(rawDamageLevels, params, options = {}) {
     const pveBonusII = !isPVP ? bonus.pveBonusII : 0;
     const toughnessBonus = !isPVP ? bonus.toughnessBonus : 0;
     
-    const excessEnergyBonus = bonus.excessEnergyBonus;
+    const excessEnergyBonus = isSkill ? bonus.excessEnergyBonus : 0;
     const natureBonus = (damageEffectType === 'instant' && isSkill) ? bonus.natureBonus : 0;
     const elementalPowerBonus = bonus.elementalPowerBonus;
 
